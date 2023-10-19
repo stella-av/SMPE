@@ -15,11 +15,11 @@
 
 ### Information
 
--   the plot uses two different scales on the same y axes, so there is no comparison possible between the two categories
+-   The plot uses two different scales on the same y axis, so there is no comparison possible between the two categories.
 
 ### Context
 
--   The plot has no title
+-   The plot has no title.
 
 
 
