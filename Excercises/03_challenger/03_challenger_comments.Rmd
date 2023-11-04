@@ -1,0 +1,12 @@
+---
+title: "03_Challenger_comments"
+output: html_document
+date: '2023-10-20'
+---
+
+## Challenger
+
+- I don't think the data where there was no malfunction should be excluded, as that is also part of the dataset.
+- I thought logistic regression could only be used if the outcome variable is binary? And in this case we are using a ratio, and not the 0/1 collision outcome anymore.
+
+
