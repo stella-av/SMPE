@@ -52,17 +52,41 @@ FirstNames <- read_delim("dpt2021.csv",delim=";")
 
 ```
 
-All of these following questions may need a preliminary analysis of the data, feel free to present answers and justifications in your own order and structure your report as it should be for a scientific report.
-
-
-1. Choose a firstname and analyse its frequency along time. Compare several firstnames frequency
-
-
 ```{r}
-FirstNames
+head(FirstNames)
 
 ```
 
+
+## Check NA
+
+```{r}
+
+FirstNames[!complete.cases(FirstNames), ]
+
+```
+
+
+
+
+```{r}
+
+FirstNames$sexe <-  factor(FirstNames$sexe) #change for plot
+
+```
+
+
+
+
+
+All of these following questions may need a preliminary analysis of the data, feel free to present answers and justifications in your own order and structure your report as it should be for a scientific report.
+
+
+## 1. Choose a firstname and analyse its frequency along time. Compare several firstnames frequency
+
+
+
+## Analyse just name Yvette
 
 ```{r}
 
@@ -74,6 +98,7 @@ head(yvette)
 
 
 ```{r}
+# groupby year
 
 yvette_years <- yvette %>% 
   group_by(annais) %>% 
@@ -85,13 +110,22 @@ yvette_years <- yvette %>%
 ```{r}
 yvette_years %>% 
   ggplot(aes(annais, sum_counts)) +
-  geom_col()
-  #geom_point()
+  #geom_col()
+  geom_line() +
+  geom_point()
+  
 
 
 ```
 
+
+
+## Compare 3 names over time
+
+
 ```{r}
+
+# add uncertainty - 95% CI?
 
 compare3 <- FirstNames %>% 
   subset(preusuel == "YVETTE" | preusuel == "JULIA" | preusuel == "LÉONE") %>% 
@@ -102,7 +136,7 @@ compare3 <- FirstNames %>%
 ```
 
 ```{r}
-# add uncertainty - 95% CI?
+
 
 compare3 %>% 
   ggplot(aes(annais, sum_counts)) +
@@ -123,7 +157,8 @@ compare3 %>%
 ```
 
 
-2. Establish by gender the most given firstname by year. Analyse the evolution of the most frequent firstname.
+
+## 2 Establish by gender the most given firstname by year. Analyse the evolution of the most frequent firstname.
 
 
 ```{r}
@@ -139,8 +174,6 @@ head(names_sum)
 
 
 
-
-
 ```{r}
 # top names with max freq by year
 
@@ -152,15 +185,18 @@ most_common <- names_sum %>%
 head(most_common)
 
 
-most_common$sexe <-  factor(most_common$sexe) #change for plot
+#most_common$sexe <-  factor(most_common$sexe) #change for plot
 ```
 
+
+## TODO split prenom rare into F and M
+
 ```{r}
-# most common name by gender
+# plot most common name by gender over time
 
 most_common %>% 
   ggplot(aes(annais, preusuel, color=sexe)) + 
-  geom_point() +
+  geom_point(position = position_jitterdodge()) +
   scale_color_discrete(name  ="Gender",
                           breaks=c("2", "1"),
                           labels=c("Female", "Male"))
@@ -170,7 +206,9 @@ most_common %>%
 
 
 
-3. Optional : Which department has a larger variety of names along time ? Is there some sort of geographical correlation with the data?
+
+
+## 3. Optional : Which department has a larger variety of names along time ? Is there some sort of geographical correlation with the data?
 
 ```{r}
 # make most common by department
@@ -206,11 +244,21 @@ Plot?
 #   ggplot(aes(annais, preusuel, color=dpt)) + 
 #   geom_point()
 
+class(FirstNames$annais)
+
 ```
 
 
 
 ```{r}
+# most common by dept in 2022
+# 
+# most_common_bydept %>%
+#   subset(annais == 2021) %>% 
+#   ggplot(aes(dpt, preusuel, color=sexe)) + 
+#   geom_jitter()
+#   
+
 
 
 ```
