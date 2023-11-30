@@ -127,7 +127,6 @@ summary(model)
 
 
 
-
 ### Both
 ```{r}
 
@@ -135,9 +134,23 @@ model <- lm(mean ~ Type * Size, data = data_CI)
 summary(model)
 
 ```
+
 Contrasts?
 
 
+
+
+### Both - sum coding
+
+```{r}
+
+contrasts(data_CI$Type) = contr.sum(3)
+
+model <- lm(mean ~ Type * Size, data = data_CI)
+summary(model)
+
+```
+why 2 interactions?
 
 
 ## Separate Size and type - separate regression model for each type of algorithm
