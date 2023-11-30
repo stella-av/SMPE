@@ -98,9 +98,9 @@ summary(model)
 contrasts(data_CI$Type)
 
 ```
-Intercept = built-in
-Type Parallel = built-in - parallel
-Type Sequential = built-in - sequential
+Intercept = built-in  \
+Type Parallel = built-in - parallel  \
+Type Sequential = built-in - sequential  \
 
 
 
@@ -134,13 +134,12 @@ model <- lm(mean ~ Type * Size, data = data_CI)
 summary(model)
 
 ```
-
 Contrasts?
 
 
 
 
-### Both - sum coding
+### Both (sum coding)
 
 ```{r}
 
@@ -149,8 +148,31 @@ contrasts(data_CI$Type) = contr.sum(3)
 model <- lm(mean ~ Type * Size, data = data_CI)
 summary(model)
 
+
+#data_CI$Type
 ```
-why 2 interactions?
+Intercept = mean - built-in?  \
+Type1 = mean -   paral?  \
+Type2 = mean - seq  \
+
+
+why 2 interactions?  \
+
+
+```{r}
+
+# data_CI$Type
+# 
+# grandmean <- mean(data_CI$mean)
+# 
+# data_builtin<- subset(data_CI, Type == " Built-in")
+# 
+# builtin <- mean(data_builtin$mean)
+# 
+# grandmean - builtin
+
+
+```
 
 
 ## Separate Size and type - separate regression model for each type of algorithm
